@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rak n' Roll Online Shop</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <!-- Bootstrap JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: darkblue;
+      color: #fff;
+      padding: 10px 0;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .container {
+      margin-bottom: 20px;
+    }
+    .item {
+      border: 1px solid #ccc;
+      padding: 20px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .item img {
+      max-width: 100%;
+      height: auto;
+    }
+    .cart {
+      border: 1px solid #ccc;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    .receipt {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 400px;
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+    .receipt h2 {
+      text-align: center;
+    }
+    .receipt-content {
+      white-space: pre-wrap;
+    }
+    .ok-button {
+      display: block;
+      margin: 20px auto;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header class="container">
+    <h1>Rak n' Roll Online Shop</h1>
+    <button class="btn btn-primary" onclick="viewStocks()">View Stocks</button>
+  </header>
+
+  <div class="container" id="items-container">
+    <!-- Items will be added dynamically here -->
+  </div>
+
+  <!-- Add New Item Form -->
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">Add New Item</h2>
+      </div>
+      <div class="panel-body">
+        <form id="add-item-form" class="form-horizontal">
+          <div class="form-group">
+            <label for="new-item-name" class="col-sm-2 control-label">Name:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="new-item-name" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="new-item-price" class="col-sm-2 control-label">Price:</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="new-item-price" min="0.01" step="0.01" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="new-item-stock" class="col-sm-2 control-label">Initial Stock:</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="new-item-stock" min="1" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="new-item-image" class="col-sm-2 control-label">Image URL:</label>
+            <div class="col-sm-10">
+              <input type="url" class="form-control" id="new-item-image" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-success">Add Item</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shopping Cart -->
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">Shopping Cart</h2>
+      </div>
+      <div class="panel-body">
+        <ul id="cart-items" class="list-group"></ul>
+        <div>Total: $<span id="total-price">0.00</span></div>
+        
+        <!-- Discount Options -->
+        <form id="discount-form" class="form-horizontal">
+          <div class="radio">
+            <label><input type="radio" id="no-discount" name="discount" value="none" checked>No Discount</label>
+          </div>
+          <div class="radio">
+            <label><input type="radio" id="senior-discount" name="discount" value="senior">Senior (20%)</label>
+          </div>
+          <div class="radio">
+            <label><input type="radio" id="pwd-discount" name="discount" value="pwd">PWD (30%)</label>
+          </div>
+          <div class="radio">
+            <label><input type="radio" id="student-discount" name="discount" value="student">Student (10%)</label>
+          </div>
+        </form>
+        
+        <button class="btn btn-primary" onclick="finalizeOrder()">Finalize Order</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Receipt -->
+  <div class="receipt" id="receipt">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">Receipt</h2>
+      </div>
+      <div class="panel-body">
+        <div class="receipt-content" id="receipt-content"></div>
+        <button class="btn btn-success ok-button" onclick="closeReceipt()">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Default data for items
+    let items = [
+      { name: "Jag", price: 750.50, stock: 100, image: "jag.jpg" },
+      { name: "Denim", price: 890.00, stock: 220, image: "denim.jpg" },
+      { name: "Lee", price: 675.99, stock: 150, image: "2.jpg" },
+      { name: "Levis", price: 1180.00, stock: 120, image: "3.jpg" },
+      { name: "Nike", price: 580.20, stock: 590, image: "z.jpg" },
+      { name: "Dinosaur", price: 950.00, stock: 110, image: "y.jpg" },
+      { name: "Kraken-Skull-Black", price: 690.80, stock: 120, image: "w.jpg" },
+      { name: "Bench-Jacket-Black", price: 2960.80, stock: 50, image: "w.jpg" },
+      { name: "Nike_Shoes-Black/Yellow", price: 1780.80, stock: 270, image: "shoes.jpg" },
+      { name: "Nike_Shoes-Black/Red", price: 1380.80, stock: 270, image: "shoes2.jpg" }
+    ];
+
+    let cartItems = []; // Define cartItems array
+
+    function renderItems() {
+      const itemsContainer = document.getElementById("items-container");
+      itemsContainer.innerHTML = "";
+      items.forEach(item => {
+        const itemDiv = document.createElement("div");
+        itemDiv.classList.add("col-sm-6", "col-md-4"); // Bootstrap grid classes
+        itemDiv.innerHTML = `
+          <div class="thumbnail item">
+            <img src="${item.image}" alt="${item.name}">
+            <div class="caption">
+              <h3>${item.name}</h3>
+              <p>₱${item.price.toFixed(2)}</p>
+              <p>Stock: ${item.stock}</p>
+              <input type="number" class="form-control" id="quantity-${item.name.toLowerCase()}" value="1">
+              <p>
+                <button class="btn btn-primary" onclick="addToCart('${item.name}', ${item.price})">Add to Cart</button>
+                <button class="btn btn-default" onclick="addStock('${item.name}')">Add Stocks</button>
+                <button class="btn btn-danger" onclick="deleteItem('${item.name}')">Delete</button>
+              </p>
+            </div>
+          </div>
+        `;
+        itemsContainer.appendChild(itemDiv);
+      });
+    }
+
+    function addToCart(itemName, itemPrice) {
+      const quantity = parseInt(document.getElementById(`quantity-${itemName.toLowerCase()}`).value);
+      const itemIndex = cartItems.findIndex(item => item.name === itemName);
+      if (itemIndex !== -1) {
+        cartItems[itemIndex].quantity += quantity;
+      } else {
+        cartItems.push({ name: itemName, price: itemPrice, quantity: quantity });
+      }
+      renderCart();
+    }
+
+    function addStock(itemName) {
+      const item = items.find(item => item.name === itemName);
+      item.stock += 10;
+      renderItems();
+    }
+
+    function deleteItem(itemName) {
+      const itemIndex = items.findIndex(item => item.name === itemName);
+      items.splice(itemIndex, 1);
+      renderItems();
+    }
+
+    function renderCart() {
+      const cartItemsElement = document.getElementById("cart-items");
+      cartItemsElement.innerHTML = "";
+      let totalPrice = 0;
+      cartItems.forEach(item => {
+        const li = document.createElement("li");
+        li.classList.add("list-group-item");
+        li.innerHTML = `
+          ${item.name} - ${item.quantity} pcs - ₱${(item.price * item.quantity).toFixed(2)}
+          <button class="btn btn-xs btn-danger" onclick="removeFromCart('${item.name}', ${item.price}, ${item.quantity})">Remove</button>
+        `;
+        cartItemsElement.appendChild(li);
+        totalPrice += item.price * item.quantity;
+      });
+      document.getElementById("total-price").textContent = totalPrice.toFixed(2);
+    }
+
+    function removeFromCart(itemName, itemPrice, quantity) {
+      const itemIndex = cartItems.findIndex(item => item.name === itemName);
+      if (itemIndex !== -1) {
+        cartItems[itemIndex].quantity -= quantity;
+        if (cartItems[itemIndex].quantity <= 0) {
+          cartItems.splice(itemIndex, 1);
+        }
+      }
+      renderCart();
+    }
+
+    function finalizeOrder() {
+      let receiptContent = "<ul>";
+      cartItems.forEach(item => {
+        receiptContent += `<li>${item.name} - ${item.quantity} pcs - ₱${(item.price * item.quantity).toFixed(2)}</li>`;
+      });
+      receiptContent += `</ul><p>Total: ₱${document.getElementById("total-price").textContent}</p>`;
+      document.getElementById("receipt-content").innerHTML = receiptContent;
+      document.getElementById("receipt").style.display = "block";
+      cartItems = []; // Clear cartItems after showing receipt
+      renderCart();
+    }
+
+    function closeReceipt() {
+      document.getElementById("receipt").style.display = "none";
+    }
+
+    function viewStocks() {
+  window.location.href = "stocks.html";
+}
+
+
+    document.getElementById("add-item-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const newItem = {
+        name: document.getElementById("new-item-name").value,
+        price: parseFloat(document.getElementById("new-item-price").value),
+        stock: parseInt(document.getElementById("new-item-stock").value),
+        image: document.getElementById("new-item-image").value
+      };
+      items.push(newItem);
+      renderItems();
+      document.getElementById("add-item-form").reset();
+    });
+
+    // Initialize by rendering items
+    renderItems();
+  </script>
+</body>
+</html>

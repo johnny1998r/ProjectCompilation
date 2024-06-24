@@ -1,0 +1,39 @@
+
+#page{
+    
+    background-color: none;
+    height: 1500px;
+    border: 1px solid black;
+    counter-increment: none;
+    max-width: 1130px;
+    max-height: fit-content;
+    
+}
+#top{
+    color: darkred;
+    font-family:Arial, Helvetica, sans-serif;
+}
+#ay{
+    color: black;
+}
+#line{
+  
+    color: darkred;
+   
+}
+#reg{
+    background-color: darkred;
+    color: antiquewhite;
+    font-family:Arial, Helvetica, sans-serif;
+}
+table {
+    border: 1px solid #990202de;
+    border-collapse: collapse;
+    width: 1100px;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.cba {
+    border: none;
+}
+

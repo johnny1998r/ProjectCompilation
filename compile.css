@@ -1,0 +1,13 @@
+#top{
+	position:absolute;
+	top:220px;
+	left:310px;
+}
+.but{
+	position:absolute;
+	top:290px;
+	left:260px;
+}
+html{
+	background: linear-gradient(to left,skyblue,lightblue);
+}

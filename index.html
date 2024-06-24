@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Compilation</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            padding-top: 50px; /* to accommodate the fixed navbar */
+            background-image: url('hml.jpg'); /* Add your background image URL here */
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: #333; /* Default text color */
+        }
+        .jumbotron {
+            background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background for readability */
+            padding: 80px 20px;
+            margin-bottom: 0;
+        }
+        .btn-group {
+            margin-top: 20px;
+        }
+        .btn {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Project Compilation</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="resume/DALIPE.html">Resume</a></li>
+                    <li><a href="DALIPE_DEITHER_JOHN/Menu.html">Menu</a></li>
+                    <li><a href="SariSariStore/SariSariStore.html">Sari-Sari Store</a></li>
+                    <li><a href="COR_DALIPE/COR.html">Certificate of Registration</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main content area -->
+    <div class="jumbotron text-center">
+        <h1>Welcome to Project Compilation</h1>
+        <p>Click on the buttons below to navigate:</p>
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary" onclick="navigateTo('resume/DALIPE.html')">Resume</button>
+            <button type="button" class="btn btn-info" onclick="navigateTo('DALIPE_DEITHER_JOHN/Menu.html')">Menu</button>
+            <button type="button" class="btn btn-success" onclick="navigateTo('SariSariStore/SariSariStore.html')">Sari-Sari Store</button>
+            <button type="button" class="btn btn-warning" onclick="navigateTo('COR_DALIPE/COR.html')">Certificate of Registration</button>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html>

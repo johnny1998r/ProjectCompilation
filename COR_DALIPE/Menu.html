@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="diva.css">
+    </head>
+
+    <body>
+        <div id="lip"><input type="checkbox" id="a" name="ulam"value="100">
+        <label for "a">Sisig</label><br>
+        <input type="checkbox" id="b" name="ulam" value="40">
+        <label for "b">Tinola</label>
+        <p id="demo"></p>
+        </div>
+        
+        <button onclick="myFunction()">Submit</button>
+        
+    </body>
+    <script>
+        function myFunction(){
+            
+            var ab = document.getElementById("a");
+            var cd = document.getElementById("b");
+            var sisig=0;
+            var tinola=0
+           
+            
+            if(ab.checked==true && cd.checked==false){
+                sisig=100;
+                
+            }
+            else if (ab.checked==false && cd.checked==true){
+                tinola=40;
+                
+            }
+            else if (ab.checked==false && cd.checked==false)
+            { tinola=0;
+            sisig=0}
+            else{
+                tinola=40;
+                sisig=100;
+                
+            }
+            var total=sisig+tinola;
+            var el=document.getElementById("demo");
+             el.textContent=total;
+        }
+    </script>
+</html>

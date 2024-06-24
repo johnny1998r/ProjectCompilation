@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stocks Information</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Current Stocks</h1>
+    <ul id="stocks-list" class="list-group">
+      <!-- JavaScript will dynamically populate this list -->
+    </ul>
+  </div>
+
+  <!-- Bootstrap JavaScript -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script>
+    // Array of stock items
+    let items = [
+      { name: "Jag", stock: 100 },
+      { name: "Denim", stock: 220 },
+      { name: "Lee", stock: 150 },
+      { name: "Levis", stock: 120 },
+      { name: "Nike", stock: 590 },
+      { name: "Dinosaur", stock: 110 },
+      { name: "Kraken-Skull-Black", stock: 120 },
+      { name: "Bench-Jacket-Black", stock: 50 },
+      { name: "Nike_Shoes-Black/Yellow", stock: 270 },
+      { name: "Nike_Shoes-Black/Red", stock: 270 }
+    ];
+
+    // Function to update stock count and display
+    function updateStock(itemIndex, change) {
+      items[itemIndex].stock += change;
+      renderStocks();
+    }
+
+    // Function to render the stocks list
+    function renderStocks() {
+      const stocksList = document.getElementById("stocks-list");
+      stocksList.innerHTML = ""; // Clear existing list
+
+      items.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.className = "list-group-item";
+        li.textContent = `${item.name} - Stock: ${item.stock}`;
+
+        // Button to increase stock
+        const increaseButton = document.createElement("button");
+        increaseButton.className = "btn btn-success btn-sm";
+        increaseButton.textContent = "+";
+        increaseButton.addEventListener("click", () => updateStock(index, 1));
+
+        // Button to decrease stock
+        const decreaseButton = document.createElement("button");
+        decreaseButton.className = "btn btn-danger btn-sm";
+        decreaseButton.textContent = "-";
+        decreaseButton.addEventListener("click", () => updateStock(index, -1));
+
+        // Append buttons to list item
+        li.appendChild(increaseButton);
+        li.appendChild(decreaseButton);
+
+        // Append list item to stocks list
+        stocksList.appendChild(li);
+      });
+    }
+
+    // Initial render when DOM content is loaded
+    document.addEventListener("DOMContentLoaded", function() {
+      renderStocks();
+    });
+  </script>
+</body>
+</html>

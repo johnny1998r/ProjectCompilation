@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <h1>Menu</h1>
+        <link rel="stylesheet" href="diva.css">
+    </head>
+    <body>
+        <div id="lip">
+        <input type="checkbox" id="a">
+        <label for "a">Sisig</label><br>
+        <input type="checkbox" id="b">
+        <label for "b">Manok</label><br>
+        <input type="checkbox" id="c">
+        <label for "c">Noodles</label><br>
+        <button onclick="submit()" style="color: orangered; background-color: black;">Total</button>
+    </div>
+        <p id="demo"></p>
+        
+        
+        <script>
+            function submit(){
+                var ab=document.getElementById("a");
+                var cd=document.getElementById("b");
+                var de=document.getElementById("c");
+                var sisig=0;
+                var manok=0;
+                var noodles=0;
+                
+                if(ab.checked==true){
+                    sisig=1;
+                }
+                if(cd.checked==true){
+                    manok=2;
+                }
+                if(de.checked==true){
+                    noodles=3;
+                }
+                var total=sisig+manok+noodles;
+                var el=document.getElementById("demo");
+                el.textContent=total;
+            }
+        </script>
+    </body>
+</html>

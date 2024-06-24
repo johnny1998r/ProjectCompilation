@@ -1,0 +1,192 @@
+#page{
+    background-color: black ;
+    height: 1600px;
+}
+#title{
+    color:orangered;
+    position: absolute;
+    top:50px;
+    right: 410px ;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size:  60px;
+}
+#burger{
+    position:absolute ;
+    left: 730px;
+    top:180px;
+    height:300px;
+    width: 400px;
+}
+#pizza{
+    position:absolute ;
+    top:590px;
+    left: 130px;
+    height:300px;
+    width: 400px;
+}
+#pasta{
+    position:absolute;
+    right: 100px;
+    top: 1050px;
+    height:300px;
+    width: 400px;
+}
+#bur{
+    color:orangered;
+    position:absolute;
+    left:190px;
+    top: 180px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: x-large;
+}
+#class{
+    color:white;
+    font-size: large;
+    position: absolute;
+    left:150px;
+    top: 270px;
+}
+#bbq{
+    color:white;
+    font-size: large;
+    position: absolute;
+    left:150px;
+    top: 300px;
+}
+#sau{
+    color:white;
+    font-size: large;
+    position: absolute;
+    left:150px;
+    top: 330px;
+}
+#chee{
+    color:white;
+    font-size: large;
+    position: absolute;
+    left:150px;
+    top: 360px;
+}
+#chee1{
+    color:white;
+    font-size: small;
+    position: absolute;
+    left:185px;
+    top: 365px;
+}
+#mix{
+    color:white;
+    font-size: large;
+    position: absolute;
+    left:150px;
+    top: 395px;
+}
+#che{
+    color:white;
+    font-size: large;
+    position: absolute;
+    left:150px;
+    top: 425px;
+}
+#che1{
+    color:white;
+    font-size: small;
+    position: absolute;
+    left:185px;
+    top: 430px;
+}
+#piz{
+    color:orangered;
+    position:absolute;
+    left:780px;
+    top: 550px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: x-large;
+}
+#veg{
+    color:white;
+    font-size: large;
+    position: absolute;
+    left:740px;
+    top: 640px;
+}
+#chi{
+    color:white;
+    font-size: large;
+    position: absolute;
+    left:740px;
+    top: 670px;
+}
+#bbqc{
+    color:white;
+    font-size: large;
+    position: absolute;
+    left:740px;
+    top: 700px;
+}
+#sea{
+    color:white;
+    font-size: large;
+    position: absolute;
+    left:740px;
+    top: 730px;
+}
+#ste{
+    color:white;
+    font-size: large;
+    position: absolute;
+    left:740px;
+    top: 760px;
+}
+#pas{
+    color:orangered;
+    position:absolute;
+    left:230px;
+    top: 1030px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: x-large;
+}
+#cp{
+    color:white;
+    font-size: large;
+    position: absolute;
+    left:200px;
+    top: 1110px;
+}
+#bas{
+    color:white;
+    font-size: large;
+    position: absolute;
+    left:200px;
+    top: 1140px;
+}
+#naga{
+    color:white;
+    font-size: large;
+    position: absolute;
+    left:200px;
+    top: 1170px;
+}
+#pep{
+    color:white;
+    font-size: large;
+    position: absolute;
+    left:200px;
+    top: 1200px;
+}
+#step{
+    color:white;
+    font-size: large;
+    position: absolute;
+    left:200px;
+    top: 1230px;
+}
+#foo{
+    color: white;
+    position: absolute;
+    top: 1460px;
+    left: 195px;
+    font-size: 60px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+    
+}
